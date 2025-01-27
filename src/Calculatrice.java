@@ -8,22 +8,26 @@ public class Calculatrice {
     String calcul = "";
     List<String> histo = new ArrayList<>();
 
+    // Méthode pour récupérer un calcul (input)
     public String ajoute() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Entrez votre calcul :");
-        calcul = scanner.next();
+        calcul = scanner.nextLine();
         return calcul;
     }
 
+    // Méthode qui retourne l'historique
     public List<String> historique() {
         return histo;
     }
 
+    // Méthodeu pour reset l'historique
     public void resetHistorique() {
         histo.clear();
         System.out.println("L'historique a été réinitialisé.");
     }
 
+    // Méthode de construction du résultat (+ add à l'historique)
     public String calculer(String calcul) {
         double result = evaluerExpression(calcul);
         String resultString = calcul + " = " + result;
@@ -87,13 +91,5 @@ public class Calculatrice {
                 return a % b;
             default: throw new IllegalArgumentException("Opérateur invalide");
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Calculatrice{" +
-                "calcul='" + calcul + '\'' +
-                ", historique=" + histo +
-                '}';
     }
 }
