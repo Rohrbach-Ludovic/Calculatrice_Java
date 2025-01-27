@@ -8,12 +8,27 @@ public class Calculatrice {
     String calcul = "";
     List<String> histo = new ArrayList<>();
 
-    // Méthode pour récupérer un calcul (input)
+    // Méthode pour récupérer un calcul VALIDE (int ou double)
     public String ajoute() {
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Entrez votre calcul :");
-        calcul = scanner.nextLine();
+
+        while (true) {
+            calcul = scanner.nextLine();
+            if (isValidCalculation(calcul)) {
+                break;
+            } else {
+                System.out.println("Entrée invalide. Veuillez entrer un calcul valide.");
+            }
+        }
         return calcul;
+    }
+
+    // Méthode pour vérifier la validité du calcul
+    private boolean isValidCalculation(String calcul) {
+        String regex = "^[0-9]+([+-/*%][0-9]+)*$|^[0-9]+(\\.[0-9]+)?([+-/*%][0-9]+(\\.[0-9]+)?)*$";
+        return calcul.matches(regex);
     }
 
     // Méthode qui retourne l'historique
@@ -42,7 +57,6 @@ public class Calculatrice {
         Stack<Double> valeurs = new Stack<>();
         Stack<Character> operateurs = new Stack<>();
 
-
         for (int i = 0; i < calcul.length(); i++) {
             char c = calcul.charAt(i);
 
@@ -63,13 +77,9 @@ public class Calculatrice {
                 operateurs.push(c);
             }
         }
-
-
         while (!operateurs.isEmpty()) {
             valeurs.push(operateurCalcul(operateurs.pop(), valeurs.pop(), valeurs.pop()));
         }
-
-
         return valeurs.pop();
     }
 
