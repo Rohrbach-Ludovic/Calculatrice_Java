@@ -1,28 +1,33 @@
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Scanner;
-import java.util.SequencedCollection;
 
 public class Calculatrice {
 
-    // une fonction qui prend le calcul
-    // un fn qui extrait
-    // une fn calcul
+
     String calcul = "";
     List<String> b = new ArrayList<>();
 
-    public Object ajoute(){
+    // Méthode pour ajouter un calcul
+    public String ajoute() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Entrez votre calcul");
+        System.out.println("Entrez votre calcul :");
+        calcul = scanner.next();
+        // Ajouter le calcul à l'historique
         b.add(calcul);
-        return calcul = scanner.next();
+        return calcul;
     }
 
-    public List<String> historique(){
+    // Méthodes pour récupérer l'historique des calculs et ensuite l'effacer
+    public List<String> historique() {
         return b;
     }
+    public void resetHistorique() {
+        b.clear(); // Efface tous les éléments de la liste
+        System.out.println("L'historique a été réinitialisé.");
+    }
 
+    // Méthode pour effectuer le calcul
     public double calculer(String calcul) {
 
         if (calcul.contains("+")) {
@@ -45,11 +50,12 @@ public class Calculatrice {
         }
     }
 
+    // Méthode pour afficher les détails dans l'obj
     @Override
     public String toString() {
         return "Calculatrice{" +
                 "calcul='" + calcul + '\'' +
-                ", b=" + b +
+                ", historique=" + b +
                 '}';
     }
 }

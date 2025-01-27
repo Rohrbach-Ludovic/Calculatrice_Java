@@ -1,10 +1,14 @@
 public class Main {
     public static void main(String[] args) {
-
         Calculatrice calc = new Calculatrice();
-        String leCalcul = (String) calc.ajoute();
-        System.out.println(calc.calculer(leCalcul));
 
-        System.out.println();
+
+        calc.ajoute();
+        calc.ajoute();
+
+
+        System.out.println("Historique des calculs : " + calc.historique());
+        calc.resetHistorique();
+        System.out.println(calc.historique());
     }
 }
